@@ -10,6 +10,9 @@ http.createServer((req, res) => {
     console.log(headers)
     console.log('*'.repeat(50))
 
+    console.log(req)
+
+    console.log('*'.repeat(50))
     res.end('ok')
 })
 .listen(10010)
