@@ -29,7 +29,7 @@ if [[ $onlyMaster == true ]] ; then
 # 任何分支都会自动构建
 else
     if [[ $branchName != $currBranchName ]] ; then 
-        git checkout $branchName
+        git checkout remotes/origin/$branchName
     fi
     git pull origin $branchName && npm i && npm run pm2
 fi

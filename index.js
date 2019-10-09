@@ -7,7 +7,7 @@ const Utils = require('./utils.js')
 http.createServer((req, res) => {
     let { url, headers, method } = req
 
-    Utils.log(`*`.repeat(50))
+    Utils.log(`*`.repeat(100))
 
     url = decodeURIComponent(url)
 
@@ -15,6 +15,7 @@ http.createServer((req, res) => {
     Utils.log(`检查接口是否为github-webhook请求${'-'.repeat(5)}`)
     if (!Utils.isWebhookRequest(url, method, headers)) {
         Utils.log(`该${method}请求${url} 不是Github Webhooks接口!!`)
+        Utils.log(`*`.repeat(100))
         res.end(`不是 Github Webhooks 接口!!`)
         return
     }
@@ -25,6 +26,7 @@ http.createServer((req, res) => {
     const msg = Utils.checkUrl(url)
     if (msg) {
         Utils.log(`${method}请求${url} => ${msg}!!`)
+        Utils.log(`*`.repeat(100))
         res.end(msg)
         return 
     }
@@ -37,9 +39,10 @@ http.createServer((req, res) => {
 
     Utils.log(`路径中包含参数projectPath=${projectServerAddress}${'-'.repeat(10)}`)
 
+    Utils.log(`接受payload数据${'-'.repeat(15)}`)
+
     req.setEncoding('utf8')
     let rawData = ''
-    Utils.log(`接受payload数据${'-'.repeat(15)}`)
     req.on('data', (chunk) => { rawData += chunk })
 
     req.on('end', () => {
@@ -76,7 +79,7 @@ http.createServer((req, res) => {
             res.end('ok')
         } catch (e) {
             Utils.log(e.message, 2)
-            Utils.log(`*`.repeat(50))
+            Utils.log(`*`.repeat(100))
             res.end('error')
         }
     });
