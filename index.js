@@ -23,7 +23,10 @@ http.createServer((req, res) => {
     }
 
     // 获取项目在服务器中的地址
-    const projectServerAddress = Utils.projectServerAddress(url)
+    const {
+        projectServerAddress,
+        onlyMaster
+    } = Utils.projectServerAddress(url)
 
     req.setEncoding('utf8')
     let rawData = ''
@@ -42,7 +45,8 @@ http.createServer((req, res) => {
             execFileSync(`./first-push.sh`, [
                 projectServerAddress, 
                 githubSsh,
-                branchName
+                branchName,
+                onlyMaster
             ])
             
             res.end('ok')

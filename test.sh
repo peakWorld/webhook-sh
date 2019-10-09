@@ -6,12 +6,12 @@ echo ${projectAddress%/*}
 
 echo ${projectAddress:0:7}
 
-function gitBranch() {
+function git.branch() {
   br=`git branch | grep "*"`
   echo ${br/* /}
 }
 
-gitBranch
+aa=$(git.branch)
 
 echo $aa
 

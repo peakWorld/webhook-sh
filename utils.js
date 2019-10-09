@@ -23,8 +23,20 @@ class Utils {
         return msg
     }
 
-    static projectServerAddress(url) {
-        return url.split('=')[1]
+    static urlInfo(url) {
+        // 只有主分支提交代码才重新发布
+        const onlyMaster = url.includes('&onlyMaster')
+        let projectServerAddress = ''
+        if (onlyMaster) {
+            projectServerAddress = url.split('&')[0].split('=')[1]
+        } else {
+            projectServerAddress = url.split('=')[1]
+        }
+         
+        return {
+            onlyMaster,
+            projectServerAddress
+        }
     }
 
     static commitInfo(commitInfo, projectServerAddress) {
