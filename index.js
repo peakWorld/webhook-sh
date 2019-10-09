@@ -5,7 +5,9 @@ const { execFileSync, execSync } = require('child_process')
 const Utils = require('./utils.js')
 
 http.createServer((req, res) => {
-    const { url, headers, method } = req
+    let { url, headers, method } = req
+
+    url = decodeURIComponent(url)
 
     // 接口是否符合标准
     if (!Utils.isWebhookRequest(url, method, headers)) {
