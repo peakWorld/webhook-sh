@@ -24,8 +24,12 @@ cd $projectAddress
 # 只有master分支才会自动构建
 if [[ $onlyMaster == true ]] ; then
     if [[ $branchName == 'master' && $currBranchName == 'master' ]] ; then
-        git pull origin master && npm run pm2
+        git pull origin master && npm i && npm run pm2
     fi
+# 任何分支都会自动构建
 else
-
+    if [[ $branchName != $currBranchName ]] ; then 
+        git checkout $branchName
+    fi
+    git pull origin $branchName && npm i && npm run pm2
 fi

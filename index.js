@@ -26,7 +26,7 @@ http.createServer((req, res) => {
     const {
         projectServerAddress,
         onlyMaster
-    } = Utils.projectServerAddress(url)
+    } = Utils.urlInfo(url)
 
     req.setEncoding('utf8')
     let rawData = ''
@@ -42,7 +42,7 @@ http.createServer((req, res) => {
             } = Utils.commitInfo(JSON.parse(rawData), projectServerAddress)
             
             // execSync(`chmod a+x *.sh`)
-            execFileSync(`./first-push.sh`, [
+            execFileSync(`./auto-publish.sh`, [
                 projectServerAddress, 
                 githubSsh,
                 branchName,
