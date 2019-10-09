@@ -1,6 +1,6 @@
 const path = require('path')
-const githubSsh = `https://github.com/peakWorld/`
-
+// const githubSsh = `https://github.com/peakWorld/`
+const githubSsh = `git@github.com:peakWorld/`
 class Utils {
 
     static isWebhookRequest(url, method, headers) {
