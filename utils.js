@@ -48,7 +48,13 @@ class Utils {
             repository,
         }  = commitInfo
 
-        const { message, timestamp, committer, added, modified } = head_commit
+        const { 
+            message, 
+            timestamp, 
+            committer, 
+            // added, 
+            // modified 
+        } = head_commit
 
         const projectName = path.basename(projectServerAddress)
 
@@ -59,12 +65,12 @@ class Utils {
 
             commitPrevId: before,
             commitId: after,
-            commitName: committer.name,
+            commitUserName: committer.name,
             commitTime: new Date(timestamp).toLocaleString(),
             commitMsg: message,
 
-            addedFiles: added,
-            modifiedFiles: modified,
+            // addedFiles: added,
+            // modifiedFiles: modified,
 
             branchName: ref.split('/')[2],
 

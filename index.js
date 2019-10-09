@@ -41,6 +41,15 @@ http.createServer((req, res) => {
                 ...commitInfo
             } = Utils.commitInfo(JSON.parse(rawData), projectServerAddress)
             
+            const {
+                projectDesc,
+                commitUserName,
+                commitTime,
+                commitMsg
+            } = commitInfo
+
+            Utils.log(`自动发布开始: 项目${projectName}(${projectDesc}) 被开发者 ${commitUserName} 于 ${commitTime} 提交分支(${branchName})代码(提交注释: ${commitMsg})`)
+
             // execSync(`chmod a+x *.sh`)
             execFileSync(`./auto-publish.sh`, [
                 projectServerAddress, 
@@ -49,6 +58,8 @@ http.createServer((req, res) => {
                 onlyMaster
             ])
             
+            Utils.log(`自动发布结束: 项目${projectName}(${projectDesc}) 被开发者 ${commitUserName} 于 ${commitTime} 提交分支(${branchName})代码(提交注释: ${commitMsg})`)
+
             res.end('ok')
         } catch (e) {
             Utils.log(e.message, 2)
